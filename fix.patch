@@ -1,0 +1,28 @@
+diff --git a/backend/node_modules/@creamy-dev/passy/index.js b/backend/node_modules/@creamy-dev/passy/index.js
+index 5a98afc..0a22d99 100644
+--- a/node_modules/@creamy-dev/passy/index.js
++++ b/node_modules/@creamy-dev/passy/index.js	
+@@ -9,9 +9,9 @@ class PassyServer {
+ 
+   async main() {
+     const options = this.options;
+-    const wss = new WebSocketServer({ port: options.originalPort });
++    this.wss = new WebSocketServer({ port: options.originalPort });
+ 
+-    wss.on("connection", async function (ws) {
++    this.wss.on("connection", async function (ws) {
+       ws.isReady = false;
+ 
+       const server = new net.Socket();
+@@ -38,9 +38,9 @@ class PassyServer {
+     delete opts.originalPort;
+     delete opts.passedPort;
+ 
+-    const proxy = new PassProxy(opts);
++    this.proxy = new PassProxy(opts);
+ 
+-    await proxy.init();
++    await this.proxy.init();
+   }
+ }
+ 

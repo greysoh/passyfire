@@ -1,0 +1,24 @@
+#active-proxies .proxy {
+  position: relative;
+  background-color: lightgrey;
+  white-space: nowrap;
+}
+
+#active-proxies .proxy .name {
+  font-weight: 700;
+  display: inline-block;
+}
+
+#active-proxies .proxy div {
+  display: inline-block;
+}
+
+#active-proxies .proxy .rmbtn {
+  position: absolute;
+  right: 0px;
+}
+
+#active-proxies .proxy .dvhandler {
+  position: absolute;
+  right: 50px;
+}

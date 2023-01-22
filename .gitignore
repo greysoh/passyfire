@@ -1,0 +1,9 @@
+# Modules
+node_modules
+
+# Package locks
+yarn.lock
+package-lock.json
+
+# Database
+db.json

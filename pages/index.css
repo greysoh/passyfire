@@ -1,0 +1,51 @@
+html {
+  background-color: lightgrey;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.login {
+  position: relative;
+  top: 100px;
+  width: 450px;
+  height: 400px;
+  background-color: white;
+  border-color: red;
+  border-radius: 12px;
+}
+
+.login .container {
+  padding: 12px;
+  position: absolute;
+  top: 0px;
+  left: 92px;
+}
+
+.login .gradient {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 90px;
+  height: 100%;
+}
+
+.login .container .Lbozo {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 7s ease infinite;
+
+  color: white;
+  background-color: white;
+
+  font-weight: 600;
+  border-color: transparent;
+  border-radius: 12px;
+
+  height: 30px;
+  width: 60px;
+
+  cursor: pointer;
+}

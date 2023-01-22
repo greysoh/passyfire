@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../root.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script defer type="module" src="./index.mjs"></script>
+
+  <title>Passyfire WebUI</title>
+</head>
+<body>
+  <b class="px24">Add New</b><br>
+  <span>Add a new proxy below.</span><br><br>
+  Name: <input style="position: absolute; left: 90px;" id="name"><br>
+  Port: <input style="position: absolute; left: 90px;" id="port" type="number"><br>
+  Path: <input style="position: absolute; left: 90px;" id="url"><br>
+  Passwords: <input style="position: absolute; left: 90px;" id="passwords_orig"><br><br>
+
+  <button id="create">Create</button>
+  <button onclick="window.close()">Cancel</button>
+</body>
+</html>

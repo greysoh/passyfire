@@ -1,0 +1,19 @@
+{
+  "name": "passyfire-backend",
+  "version": "0.1.0",
+  "description": "OH SHID FAR it on fi",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "@creamy-dev/1udb": "^1.1.2",
+    "@creamy-dev/libincenerator": "^0.1.2",
+    "@creamy-dev/passy": "^0.1.3",
+    "express": "^4.18.2",
+    "js-sha512": "^0.8.0"
+  }
+}

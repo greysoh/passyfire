@@ -1,7 +1,7 @@
 import { genAccount } from "./genUser.mjs";
 import { post } from "/libs/BLT-Wrap.mjs";
 
-const proxies = await post("/api/v1/tunnels", {
+const proxies = await post("/api/v1/users", {
   token: localStorage.getItem("token")
 })
 

@@ -4,7 +4,7 @@ export function genAccount(entry, rmHandler) {
 
   const nameDiv = document.createElement("div");
   nameDiv.className = "name";
-  nameDiv.innerHTML = "&nbsp;" + entry.name;
+  nameDiv.innerHTML = "&nbsp;" + entry.username;
 
   const rmBtn = document.createElement("button");
   rmBtn.className = "rmbtn"

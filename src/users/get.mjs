@@ -36,10 +36,8 @@ export async function main(db) {
     });
   
     return res.send(JSON.stringify({
-      data: {
-        success: true,
-        data: userDetails
-      }
+      success: true,
+      data: userDetails
     }));
   });
 

@@ -1,4 +1,4 @@
-import { post } from "../../Heimdall.mjs";
+import { post } from "/libs/BLT-Wrap.mjs";
 
 const urlParams = new URLSearchParams(window.location.search);
 

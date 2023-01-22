@@ -1,4 +1,4 @@
-import { post } from "../../Heimdall.mjs";
+import { post } from "/libs/BLT-Wrap.mjs";
 
 document.getElementById("create").addEventListener("click", async() => {
   const name = document.getElementById("name").value;

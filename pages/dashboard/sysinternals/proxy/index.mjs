@@ -1,5 +1,5 @@
 import { generateDashboard } from "./genDashboard.mjs";
-import { post } from "../../../libs/BLT-Wrap.mjs";
+import { post } from "/libs/BLT-Wrap.mjs";
 
 const proxies = await post("/api/v1/tunnels", {
   token: localStorage.getItem("token")

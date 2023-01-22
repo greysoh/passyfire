@@ -24,7 +24,7 @@ for (const i of proxies.data.data) {
   }
 
   function detail() {
-    window.open("details/index.html?name=" + i.name, "view", "popup");
+    window.open("details/index.html?name=" + i.name, "view", "popup,width=300,height=150");
   }
 
   async function rm() {

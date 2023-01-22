@@ -48,9 +48,12 @@ iframe {
 }
 
 .titlebar .buttons .lg {
+  /* FIXME: UI breaks slightly in Chrome (tested in Edge, they both use the same Engine), but not Firefox. What the hell? */
+  --btn-width: 83px;
+
   position: absolute;
-  left: calc(100% - (90px + 10px));
-  width: 90px;
+  left: calc(100% - (var(--btn-width) + 8px));
+  width: var(--btn-width);
 }
 
 .text-gradient {

@@ -12,9 +12,12 @@ body {
   top: 100px;
   width: 450px;
   height: 400px;
-  background-color: white;
-  border-color: red;
+  background-color: #282828;
+  color: white;
+
+  border-width: 12px;
   border-radius: 12px;
+  border-color: red; /* TODO: broken */
 }
 
 .login .container {

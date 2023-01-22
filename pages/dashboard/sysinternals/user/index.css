@@ -1,0 +1,19 @@
+#active-users .user {
+  position: relative;
+  background-color: lightgrey;
+  white-space: nowrap;
+}
+
+#active-users .user .name {
+  font-weight: 700;
+  display: inline-block;
+}
+
+#active-users .user div {
+  display: inline-block;
+}
+
+#active-users .user .rmbtn {
+  position: absolute;
+  right: 0px;
+}

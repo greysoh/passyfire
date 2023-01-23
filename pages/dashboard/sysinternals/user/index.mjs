@@ -7,16 +7,16 @@ const proxies = await post("/api/v1/users", {
 
 for (const i of proxies.data.data) {
   async function rm() {
-    const data = await post(`/api/v1/tunnels/remove`, {
+    const data = await post(`/api/v1/users/remove`, {
       token: localStorage.getItem("token"),
-      name: i.name
+      username: i.username
     })
 
     if (data instanceof axios.AxiosError) {
       return alert(
         "Removing user failed with code %s: %s"
-          .replace("%s", login.response.status)
-          .replace("%s", login.response.data.error)
+          .replace("%s", data.response.status)
+          .replace("%s", data.response.data.error)
       );
     }
 

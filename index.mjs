@@ -11,6 +11,7 @@ import { syncRunners } from './libs/syncRunners.mjs';
 
 import * as login from "./src/users/login.mjs";
 import * as userGet from "./src/users/get.mjs";
+import * as userRm from "./src/users/remove.mjs";
 
 import * as add from "./src/tunnels/add.mjs";
 import * as rm from "./src/tunnels/remove.mjs";
@@ -107,6 +108,7 @@ app.use(express.static("./pages/"));
 // ./src/users
 app.use(await login.main(db, appState, syncRunnersEx));
 app.use(await userGet.main(db, appState, syncRunnersEx));
+app.use(await userRm.main(db, appState, syncRunnersEx))
 
 // ./src/tunnels
 app.use(await add.main(db, appState, syncRunnersEx));

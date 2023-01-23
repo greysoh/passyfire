@@ -23,6 +23,7 @@ export async function main(db) {
     }
   
     return res.send(JSON.stringify({
+      success: true,
       data: {
         token: user.token
       }

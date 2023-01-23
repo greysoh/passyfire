@@ -17,6 +17,7 @@ import * as userAdd from "./src/users/add.mjs";
 
 import * as add from "./src/tunnels/add.mjs";
 import * as rm from "./src/tunnels/remove.mjs";
+import * as edit from "./src/tunnels/edit.mjs";
 import * as get from "./src/tunnels/get.mjs";
 import * as start from "./src/tunnels/start.mjs";
 import * as stop from "./src/tunnels/stop.mjs";
@@ -112,16 +113,17 @@ await syncRunnersEx();
 app.use(express.static("./pages/"));
 
 // ./src/users
-app.use(await login.main(db, appState, syncRunnersEx));
-app.use(await userGet.main(db, appState, syncRunnersEx));
-app.use(await userRm.main(db, appState, syncRunnersEx));
-app.use(await userAdd.main(db, appState, syncRunnersEx));
+app.use(await login.main   (db, appState, syncRunnersEx));
+app.use(await userGet.main (db, appState, syncRunnersEx));
+app.use(await userRm.main  (db, appState, syncRunnersEx));
+app.use(await userAdd.main (db, appState, syncRunnersEx));
 
 // ./src/tunnels
-app.use(await add.main(db, appState, syncRunnersEx));
-app.use(await rm.main(db, appState, syncRunnersEx));
-app.use(await get.main(db, appState, syncRunnersEx));
-app.use(await start.main(db, appState, syncRunnersEx));
-app.use(await stop.main(db, appState, syncRunnersEx));
+app.use(await add.main     (db, appState, syncRunnersEx));
+app.use(await rm.main      (db, appState, syncRunnersEx));
+app.use(await get.main     (db, appState, syncRunnersEx));
+app.use(await start.main   (db, appState, syncRunnersEx));
+app.use(await stop.main    (db, appState, syncRunnersEx));
+app.use(await edit.main    (db, appState, syncRunnersEx));
 
 app.listen(8000); 

@@ -34,3 +34,28 @@ Then, create the container:
 ```bash
 $ docker create --network="host" --env-file=".env" passyfire
 ```
+## Docker Database Backing Up
+Let's assume you already have the container name (or id).  
+  
+First, start the container:
+```bash
+docker start CONTAINER_NAME_OR_ID
+```
+First, get a shell in the container:
+```bash
+docker exec -it CONTAINER_NAME_OR_ID "/bin/sh"
+```
+You are now in the container. Run the following command:
+```bash
+$ clear; cat db.json; echo; echo "DO NOT COPY BEYOND THIS LINE"
+```
+(NOTE: All you really have to do is `cat db.json`, but I did it this way to make it easier to see.)  
+You should see output like this:
+```json
+{"keys": ["data_here"], "names": ["more_data"], "version": 1}
+```
+Copy all that data, and save it to a `db.json` file. Note that you must not include anything extra.
+## Docker Database Restoring Backup
+You *must* do this before creating a container, by the way.  
+  
+All you have to do is copy the db.json file you created to the root of this directory, and create the image, then the container.

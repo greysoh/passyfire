@@ -70,7 +70,7 @@ if (!(await db.get("tunnels"))) {
     const i = migrateCheck[j];
 
     if (i.port) {
-      console.log(" - Migrating '%s'...", i.name);
+      console.log("Migrating '%s'...", i.name);
       migrateCheck[j].proxyUrlSettings = {
         host: "sameAs",
         port: i.port

@@ -62,6 +62,26 @@ if (!(await db.get("tunnels"))) {
   await db.add("tunnels", JSON.stringify([]));
 }
 
+// Migration from old db stuff
+{
+  const migrateCheck = JSON.parse(await db.get("tunnels"));
+  for (const j in migrateCheck) {
+    const i = migrateCheck[j];
+
+    if (i.port) {
+      console.log(" - Migrating '%s'...", i.name);
+      migrateCheck[j].proxyUrlSettings = {
+        host: "sameAs",
+        port: i.port
+      }
+
+      migrateCheck[j].port = undefined;
+
+      await db.changeValue("tunnels", JSON.stringify(migrateCheck));
+    }
+  }
+}
+
 const appState = {
   tunnels: {
     list: JSON.parse(await db.get("tunnels")).map((i) => { 

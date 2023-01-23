@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/root.css">
+  <script defer type="module" src="index.mjs"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <title>PassyFire WebUI</title>
+</head>
+<body>
+  <b class="px24">Add User</b><br><br>
+  <b>This user should be allowed to:</b>
+  <div class="scopes">
+    &nbsp;<input id="users.add" type="checkbox">Add other users<br>
+    &nbsp;<input id="users.remove" type="checkbox">Remove other users<br>
+    &nbsp;<input id="users.get" type="checkbox">Get other users<br>
+    &nbsp;<input id="users.getPasswords" type="checkbox">Get password hashes and tokens of other users<br>
+    &nbsp;<input id="routes.add" type="checkbox">Add routes<br>
+    &nbsp;<input id="routes.remove" type="checkbox">Remove routes<br>
+    &nbsp;<input id="routes.start" type="checkbox">Start routes<br>
+    &nbsp;<input id="routes.stop" type="checkbox">Stop routes<br> 
+  </div><br>
+  <b>User details</b><br>
+  
+  Username: <input id="username" style="position: absolute; left: 90px;" type="email"><br>
+  Password: <input id="password" style="position: absolute; left: 90px;" type="password"><br>
+
+  <br>
+
+  <button disabled id="create">Loading...</button>
+</body>
+</html>

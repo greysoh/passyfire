@@ -5,6 +5,14 @@ const proxies = await post("/api/v1/users", {
   token: localStorage.getItem("token")
 })
 
+if (proxies instanceof axios.AxiosError) {
+  throw alert(
+    "Getting users failed with code %s: %s"
+      .replace("%s", proxies.response.status)
+      .replace("%s", proxies.response.data.error)
+  );
+}
+
 for (const i of proxies.data.data) {
   async function rm() {
     const data = await post(`/api/v1/users/remove`, {

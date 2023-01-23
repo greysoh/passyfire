@@ -20,3 +20,17 @@ Then, start the application:
 ```bash
 npm start
 ```
+## Docker Usage
+First, build the image:
+```bash
+$ docker build -t passyfire --network=host .
+```
+Create the initial account .env file, with these contents:
+```
+PF_SET_USERNAME=USERNAME_HERE
+PF_SET_PASSWORD=PASSWORD_HERE
+```
+Then, create the container:
+```bash
+$ docker create --network="host" --env-file=".env" passyfire
+```

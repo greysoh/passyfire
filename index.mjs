@@ -22,6 +22,8 @@ import * as get from "./src/tunnels/get.mjs";
 import * as start from "./src/tunnels/start.mjs";
 import * as stop from "./src/tunnels/stop.mjs";
 
+import * as scopes from "./src/static/getScopes.mjs";
+
 // Node.JS Modules don't have __dirname or __filename, so I had to settle for this.
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -125,5 +127,8 @@ app.use(await get.main     (db, appState, syncRunnersEx));
 app.use(await start.main   (db, appState, syncRunnersEx));
 app.use(await stop.main    (db, appState, syncRunnersEx));
 app.use(await edit.main    (db, appState, syncRunnersEx));
+
+// ./src/static
+app.use(await scopes.main  (db, appState, syncRunnersEx));
 
 app.listen(8000); 

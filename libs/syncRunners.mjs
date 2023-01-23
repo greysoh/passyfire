@@ -7,8 +7,8 @@ export async function syncRunners(runners) {
     if (!i.running) continue;
     
     const passyInstance = new PassyServer({
-      originalPort: i.port - 1,
-      passedPort: i.port,
+      originalPort: i.proxyUrlSettings.port - 1,
+      passedPort: i.proxyUrlSettings.port,
 
       isIncenerator: false,
       passwords: i.passwords,

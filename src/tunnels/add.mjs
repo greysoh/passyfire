@@ -50,7 +50,10 @@ export async function main(db, appState, syncRunnersEx) {
     }
   
     const tunnel = {
-      "port": req.body.tunnel.port,
+      "proxyUrlSettings": {
+        "host": req.body.tunnel.host ? req.body.tunnel.host : "sameAs",
+        "port": req.body.tunnel.port,
+      },
       "dest": req.body.tunnel.dest,
       "passwords": req.body.tunnel.passwords,
       "name": req.body.tunnel.name

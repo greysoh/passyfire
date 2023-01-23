@@ -12,10 +12,6 @@ $ cd passyfire
 # Install packages
 $ npm install
 ```
-Because I'm lazy (cry about it), you also need to apply a git patch to my 1udb library.
-```bash
-$ git apply fix.patch
-```
 For initial setup, set the following environment variables:
   * `PF_SET_USERNAME` to a username for the default account creation
   * `PF_SET_PASSWORD` to a password for the default account creation  

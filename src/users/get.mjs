@@ -20,7 +20,7 @@ export async function main(db) {
       }));
     }
 
-    if (!user.permissions.hasAll && !user.permissions.users.hasAll && !user.permissions.users.get) {
+    if (!user.permissions.users.get) {
       return res.status(403).send(JSON.stringify({
         error: "Invalid scope(s)"
       }))

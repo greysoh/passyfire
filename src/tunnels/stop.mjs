@@ -21,7 +21,7 @@ export async function main(db, appState, syncRunnersEx) {
       return res.status(403).send(JSON.stringify({
         error: "Invalid token"
       }))
-    } else if (!user.permissions.hasAll && !user.permissions.routes.hasAll && !user.permissions.routes.stop) {
+    } else if (!user.permissions.routes.stop) {
       return res.status(403).send(JSON.stringify({
         error: "Invalid scope(s)"
       }));

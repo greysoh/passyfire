@@ -36,7 +36,7 @@ export async function main(db, appState, syncRunnersEx) {
       }))
     }
   
-    if (!user.permissions.hasAll && !user.permissions.routes.hasAll && !(user.permissions.routes.add && user.pemissions.routes.remove)) {
+    if (!user.permissions.routes.add && !user.pemissions.routes.remove) {
       return res.status(403).send(JSON.stringify({
         error: "Invalid scope(s)"
       }))

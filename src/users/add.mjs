@@ -34,7 +34,7 @@ export async function main(db) {
       }))
     }
 
-    if (!userVerify.permissions.hasAll && !userVerify.permissions.users.hasAll && !userVerify.users.add) {
+    if (!userVerify.users.add) {
       return res.status(400).send(JSON.stringify({
         error: "Invalid scope(s)"
       }));

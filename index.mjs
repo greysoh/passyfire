@@ -8,10 +8,12 @@ import Database from "@creamy-dev/1udb";
 
 import { genToken } from './libs/genToken.mjs';
 import { syncRunners } from './libs/syncRunners.mjs';
+import { getScopesAllEnabled } from './libs/noScope.mjs';
 
 import * as login from "./src/users/login.mjs";
 import * as userGet from "./src/users/get.mjs";
 import * as userRm from "./src/users/remove.mjs";
+import * as userAdd from "./src/users/add.mjs";
 
 import * as add from "./src/tunnels/add.mjs";
 import * as rm from "./src/tunnels/remove.mjs";
@@ -48,23 +50,7 @@ if (!(await db.get("users"))) {
     username: username,
     password: sha.sha512(password), // TODO: bcrypt
     token: genToken(username),
-    permissions: {
-      hasAll: true,
-      users: {
-        hasAll: true,
-        add: true,
-        remove: true,
-        get: true,
-        getPasswords: true
-      },
-      routes: {
-        hasAll: true,
-        add: true,
-        remove: true,
-        start: true,
-        stop: true
-      }
-    }
+    permissions: getScopesAllEnabled()
   }
 
   await db.add("users", JSON.stringify([user]));
@@ -108,7 +94,8 @@ app.use(express.static("./pages/"));
 // ./src/users
 app.use(await login.main(db, appState, syncRunnersEx));
 app.use(await userGet.main(db, appState, syncRunnersEx));
-app.use(await userRm.main(db, appState, syncRunnersEx))
+app.use(await userRm.main(db, appState, syncRunnersEx));
+app.use(await userAdd.main(db, appState, syncRunnersEx));
 
 // ./src/tunnels
 app.use(await add.main(db, appState, syncRunnersEx));

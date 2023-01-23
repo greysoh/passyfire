@@ -1,10 +1,16 @@
 html {
   background-color: lightgrey;
+  overflow: hidden;
 }
 
 body {
   display: grid;
   place-items: center;
+}
+
+.nojs {
+  top: 0px;
+  left: 0px;
 }
 
 .login {

@@ -1,4 +1,4 @@
-import { get, post } from "./libs/BLT-Wrap.mjs";
+import { post } from "./libs/BLT-Wrap.mjs";
 
 if (localStorage.getItem("token_rst")) {
   document.getElementById("login-text").innerText = "Oops! We ran into an issue, and need you to log back in. " + document.getElementById("login-text").innerText;

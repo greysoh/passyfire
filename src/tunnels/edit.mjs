@@ -48,14 +48,21 @@ export async function main(db, appState, syncRunnersEx) {
         error: "Tunnel does not exist!"
       }))
     }
+
+    const legacyProxySettings = {
+      "host": req.body.tunnel.host ? req.body.tunnel.host : checkIfExistingTunnel.proxyUrlSettings.host,
+      "port": req.body.tunnel.port ? req.body.tunnel.port : checkIfExistingTunnel.proxyUrlSettings.port,
+    }
+
+    const proxySettings = {
+      "host": req.body.proxySettings.host ? req.body.proxySettings.host : checkIfExistingTunnel.proxyUrlSettings.host,
+      "port": req.body.proxySettings.port ? req.body.proxySettings.port : checkIfExistingTunnel.proxyUrlSettings.port,
+    }
   
     const tunnel = {
-      "proxyUrlSettings": {
-        "host": req.body.tunnel.host ? req.body.tunnel.host : "sameAs",
-        "port": req.body.tunnel.port,
-      },
-      "dest": req.body.tunnel.dest,
-      "passwords": req.body.tunnel.passwords,
+      "proxyUrlSettings": req.body.tunnel.proxyUrlSettings ? proxySettings : legacyProxySettings,
+      "dest": req.body.tunnel.dest ? req.body.tunnel.dest : checkIfExistingTunnel.dest,
+      "passwords": req.body.tunnel.passwords ? req.body.passwords : checkIfExistingTunnel.passwords,
       "name": req.body.tunnel.name
     }
 

@@ -27,7 +27,7 @@ export async function main(db) {
     }
 
     const userDetails = users.map((i) => {
-      if (i.username != user.username) {
+      if (i.token != user.token) {
         i.password = undefined;
         i.token = undefined;
       }

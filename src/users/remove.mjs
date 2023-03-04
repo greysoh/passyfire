@@ -35,10 +35,6 @@ export async function main(db) {
       return res.status(403).send(JSON.stringify({
         error: "Username specified is not registered"
       }))
-    } else if (removeUser.username == user.username) {
-      return res.status(775).send(JSON.stringify({
-        error: "You can't remove yourself, silly!"
-      }))
     }
 
     users.splice(users.indexOf(removeUser), 1);

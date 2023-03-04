@@ -26,8 +26,8 @@ document.getElementById("create").addEventListener("click", async() => {
   if (data instanceof axios.AxiosError) {
     return alert(
       "Tunnel creation failed with code %s: %s"
-        .replace("%s", login.response.status)
-        .replace("%s", login.response.data.error)
+        .replace("%s", data.response.status)
+        .replace("%s", data.response.data.error)
     );
   }
 

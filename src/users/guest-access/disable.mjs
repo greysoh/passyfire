@@ -3,14 +3,10 @@ import express from "express";
 export async function main(db) {
   const app = express.Router();
 
-  app.post("/api/v1/users/remove", async(req, res) => {
+  app.post("/api/v1/users/guest-access/disable", async(req, res) => {
     const users = JSON.parse(await db.get("users"));
   
-    if (!req.body.username) {
-      return res.status(400).send(JSON.stringify({
-        error: "Invalid username"
-      }))
-    } else if (!req.body.token) {
+    if (!req.body.token) {
       return res.status(400).send(JSON.stringify({
         error: "Invalid token"
       }))
@@ -30,10 +26,10 @@ export async function main(db) {
       }))
     }
 
-    const removeUser = users.find(i => i.username == req.body.username);
+    const removeUser = users.find(i => i.username == "guest");
     if (!removeUser) {
       return res.status(403).send(JSON.stringify({
-        error: "Username specified is not registered"
+        error: "Guest access is not enabled"
       }))
     }
 

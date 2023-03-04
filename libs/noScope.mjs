@@ -14,3 +14,12 @@ export function getScopesAllEnabled() {
     }
   }
 }
+
+export function getScopesAllDisabled() {
+  const allEnabled = getScopesAllEnabled();
+
+  Object.keys(allEnabled.users).forEach(v => allEnabled.users[v] = false);
+  Object.keys(allEnabled.routes).forEach(v => allEnabled.routes[v] = false);
+
+  return allEnabled;
+}

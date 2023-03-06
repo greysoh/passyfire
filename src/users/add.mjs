@@ -4,7 +4,7 @@ import { genToken } from "../../libs/genToken.mjs";
 import { getScopesAllEnabled } from "../../libs/noScope.mjs";
 
 import express from "express";
-import { mergeDeep } from "../../libs/deepMergeObj.mjs";
+import { mergeUserPerms } from "../../libs/mergeUser.mjs";
 
 export async function main(db) {
   const app = express.Router();
@@ -40,7 +40,7 @@ export async function main(db) {
       }));
     }
 
-    const scopes = mergeDeep(defaultScopes, userVerify.permissions, req.body.permissions);
+    const scopes = mergeUserPerms(defaultScopes, userVerify.permissions, req.body.permissions);
     
     const userData = {
       username: req.body.username,

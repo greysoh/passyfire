@@ -1,9 +1,11 @@
 import { genAccount } from "./genUser.mjs";
 import { post } from "/libs/BLT-Wrap.mjs";
 
+import { enableGuest, disableGuest } from "./guestToggle.mjs";
+
 const proxies = await post("/api/v1/users", {
-  token: localStorage.getItem("token")
-})
+  token: localStorage.getItem("token"),
+});
 
 if (proxies instanceof axios.AxiosError) {
   throw alert(
@@ -13,12 +15,21 @@ if (proxies instanceof axios.AxiosError) {
   );
 }
 
+const guestEnabled = proxies.data.data.find((i) => i.username == "guest");
+
+document.getElementById("guest").innerText = `${
+  proxies.data.data.find((i) => i.username == "guest") ? "Disable" : "Enable"
+} Guest Access`;
+document.getElementById("guest").disabled = false;
+
+document.getElementById("guest").onclick = guestEnabled ? disableGuest : enableGuest;
+
 for (const i of proxies.data.data) {
   async function rm() {
     const data = await post(`/api/v1/users/remove`, {
       token: localStorage.getItem("token"),
-      username: i.username
-    })
+      username: i.username,
+    });
 
     if (data instanceof axios.AxiosError) {
       return alert(

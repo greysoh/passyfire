@@ -29,6 +29,8 @@ document.getElementById("routes.add").checked = s.routes.add;
 document.getElementById("routes.remove").checked = s.routes.remove;
 document.getElementById("routes.start").checked = s.routes.start;
 document.getElementById("routes.stop").checked = s.routes.stop;
+document.getElementById("routes.get").checked = s.routes.get;
+document.getElementById("routes.getPasswords").checked = s.routes.getPasswords;
 
 const createBtn = document.getElementById("create");
 createBtn.addEventListener("click", async() => {
@@ -48,13 +50,14 @@ createBtn.addEventListener("click", async() => {
         add: document.getElementById("routes.add").checked,
         remove: document.getElementById("routes.remove").checked,
         start: document.getElementById("routes.start").checked,
-        stop: document.getElementById("routes.stop").checked
+        stop: document.getElementById("routes.stop").checked,
+        get: document.getElementById("routes.get").checked,
+        getPasswords: document.getElementById("routes.getPasswords").checked
       }
     }
   })
 
   if (data instanceof axios.AxiosError) {
-    console.log(data);
     return alert(
       "Adding user failed with code %s: %s"
         .replace("%s", data.response.status)

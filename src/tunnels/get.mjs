@@ -20,10 +20,27 @@ export async function main(db, appState) {
         error: "Invalid token"
       }))
     }
+
+    if (!user.permissions.routes.get) {
+      return res.status(403).send(JSON.stringify({
+        error: "Invalid scope(s)"
+      }))
+    }
+
+    const tunnelList = appState.tunnels.list.map((i) => {
+      if (user.permissions.routes.getPasswords) return i;
+
+      return {
+        proxyUrlSettings: i.proxyUrlSettings,
+        dest: i.dest,
+        name: i.name,
+        running: i.running
+      }
+    });
     
     return res.send({
       success: true,
-      data: appState.tunnels.list
+      data: tunnelList
     })
   })
 

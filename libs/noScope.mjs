@@ -10,7 +10,9 @@ export function getScopesAllEnabled() {
       add: true,
       remove: true,
       start: true,
-      stop: true
+      stop: true,
+      get: true,
+      getPasswords: true
     }
   }
 }

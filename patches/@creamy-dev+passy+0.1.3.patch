@@ -1,5 +1,5 @@
 diff --git a/node_modules/@creamy-dev/passy/index.js b/node_modules/@creamy-dev/passy/index.js
-index 5a98afc..0080bbd 100644
+index 5a98afc..1a6808e 100644
 --- a/node_modules/@creamy-dev/passy/index.js
 +++ b/node_modules/@creamy-dev/passy/index.js
 @@ -1,6 +1,7 @@
@@ -11,7 +11,7 @@ index 5a98afc..0080bbd 100644
  
  class PassyServer {
    constructor(options) {
-@@ -9,25 +10,36 @@ class PassyServer {
+@@ -9,25 +10,43 @@ class PassyServer {
  
    async main() {
      const options = this.options;
@@ -24,28 +24,35 @@ index 5a98afc..0080bbd 100644
  
 -      const server = new net.Socket();
 +      if (options.server.protocol == "TCP") {
-+        const server = new net.Socket();
-   
++        ws.isReady = false;
+ 
 -      server.connect(options.server.port, options.server.ip, function () {
 -        ws.isReady = true;
 -        ws.send("Passy: Connected");
 -      });
-+        server.on("data", function (data) {
-+          ws.send(data);
-+        });
++        const server = new net.Socket();
    
 -      server.on("data", function (data) {
 -        if (ws.isReady) ws.send(data);
 -      });
-+        ws.on("message", function (data) {
-+          server.write(data);
++        server.connect(options.server.port, options.server.ip, function () {
++          ws.isReady = true;
++          ws.send("Passy: Connected");
 +        });
-+      } else {
-+        const server = dgram.createSocket("udp4");
- 
+   
 -      ws.on("message", function (data) {
 -        if (ws.isReady) server.write(data);
 -      });
++        server.on("data", function (data) {
++          if (ws.isReady) ws.send(data);
++        });
++  
++        ws.on("message", function (data) {
++          if (ws.isReady) server.write(data);
++        });
++      } else {
++        const server = dgram.createSocket("udp4");
++
 +        server.on("message", function (data, rinfo) {
 +          if (rinfo.ip != options.server.ip && rinfo.port != options.server.port) return;
 + 
@@ -61,7 +68,7 @@ index 5a98afc..0080bbd 100644
      });
  
      let opts = this.options;
-@@ -38,9 +50,9 @@ class PassyServer {
+@@ -38,9 +57,9 @@ class PassyServer {
      delete opts.originalPort;
      delete opts.passedPort;
  

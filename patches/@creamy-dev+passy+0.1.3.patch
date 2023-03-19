@@ -1,8 +1,17 @@
 diff --git a/node_modules/@creamy-dev/passy/index.js b/node_modules/@creamy-dev/passy/index.js
-index 5a98afc..0a22d99 100644
+index 5a98afc..9058ef6 100644
 --- a/node_modules/@creamy-dev/passy/index.js
 +++ b/node_modules/@creamy-dev/passy/index.js
-@@ -9,9 +9,9 @@ class PassyServer {
+@@ -1,6 +1,7 @@
+ const PassProxy = require("./libs/passedWS/index.js");
+ const { WebSocketServer } = require("ws"),
+-  net = require("net");
++  net = require("net"),
++  dgram = require("dgram");
+ 
+ class PassyServer {
+   constructor(options) {
+@@ -9,12 +10,12 @@ class PassyServer {
  
    async main() {
      const options = this.options;
@@ -13,8 +22,12 @@ index 5a98afc..0a22d99 100644
 +    this.wss.on("connection", async function (ws) {
        ws.isReady = false;
  
-       const server = new net.Socket();
-@@ -38,9 +38,9 @@ class PassyServer {
+-      const server = new net.Socket();
++      const server = options.server.protocol == "UDP" ? new dgram.Socket() : new net.Socket();
+ 
+       server.connect(options.server.port, options.server.ip, function () {
+         ws.isReady = true;
+@@ -38,9 +39,9 @@ class PassyServer {
      delete opts.originalPort;
      delete opts.passedPort;
  

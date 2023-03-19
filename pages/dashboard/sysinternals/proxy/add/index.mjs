@@ -19,7 +19,8 @@ document.getElementById("create").addEventListener("click", async() => {
       name: name,
       port: port,
       dest: url,
-      passwords: password
+      passwords: password,
+      UDPEnabled: false // TODO
     }
   });
 

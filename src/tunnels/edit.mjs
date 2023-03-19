@@ -15,7 +15,7 @@ export async function main(db, appState, syncRunnersEx) {
       return res.status(400).send(JSON.stringify({
         error: "Missing tunnel"
       }))
-    } else if (!req.body.tunnel.port || !req.body.tunnel.dest || !req.body.tunnel.passwords || !req.body.tunnel.name) {
+    } else if (!req.body.tunnel.dest || !req.body.tunnel.passwords || !req.body.tunnel.name) {
       return res.status(400).send(JSON.stringify({
         error: "Missing tunnel configuration data"
       }))
@@ -49,21 +49,16 @@ export async function main(db, appState, syncRunnersEx) {
       }))
     }
 
-    const legacyProxySettings = {
-      "host": req.body.tunnel.host ? req.body.tunnel.host : checkIfExistingTunnel.proxyUrlSettings.host,
-      "port": req.body.tunnel.port ? req.body.tunnel.port : checkIfExistingTunnel.proxyUrlSettings.port,
-    }
-
-    const proxySettings = {
-      "host": req.body.proxySettings.host ? req.body.proxySettings.host : checkIfExistingTunnel.proxyUrlSettings.host,
-      "port": req.body.proxySettings.port ? req.body.proxySettings.port : checkIfExistingTunnel.proxyUrlSettings.port,
-    }
+    const tunnelSrc = req.body.tunnel;
   
     const tunnel = {
-      "proxyUrlSettings": req.body.tunnel.proxyUrlSettings ? proxySettings : legacyProxySettings,
-      "dest": req.body.tunnel.dest ? req.body.tunnel.dest : checkIfExistingTunnel.dest,
-      "passwords": req.body.tunnel.passwords ? req.body.passwords : checkIfExistingTunnel.passwords,
-      "name": req.body.tunnel.name
+      "proxyUrlSettings": {
+        "host": tunnelSrc.proxyUrlSettings.host ? tunnelSrc.proxyUrlSettings.host : checkIfExistingTunnel.proxyUrlSettings.host,
+        "port": tunnelSrc.proxyUrlSettings.port ? tunnelSrc.proxyUrlSettings.port : checkIfExistingTunnel.proxyUrlSettings.port,
+      },
+      "dest": tunnelSrc.dest ? tunnelSrc.dest : checkIfExistingTunnel.dest,
+      "passwords": tunnelSrc.passwords ? tunnelSrc.passwords : checkIfExistingTunnel.passwords,
+      "name": tunnelSrc.name ? tunnelSrc.name : checkIfExistingTunnel.name
     }
 
     tunnels.splice(tunnels.indexOf(checkIfExistingTunnel), 1, tunnel)

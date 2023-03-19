@@ -62,6 +62,13 @@ export async function main(db, appState, syncRunnersEx) {
       "name": tunnelSrc.name ? tunnelSrc.name : checkIfExistingTunnel.name
     }
 
+    // Validate tunnel
+    if (tunnel.proxyUrlSettings.protocol != "UDP" && tunnel.proxyUrlSettings.protocol != "TCP") {
+      return res.status(403).send({
+        "error": "Protocol is not TCP or UDP."
+      });
+    }
+
     tunnels.splice(tunnels.indexOf(checkIfExistingTunnel), 1, tunnel)
     await db.changeValue("tunnels", JSON.stringify(tunnels));
   

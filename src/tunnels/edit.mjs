@@ -55,6 +55,7 @@ export async function main(db, appState, syncRunnersEx) {
       "proxyUrlSettings": {
         "host": tunnelSrc.proxyUrlSettings.host ? tunnelSrc.proxyUrlSettings.host : checkIfExistingTunnel.proxyUrlSettings.host,
         "port": tunnelSrc.proxyUrlSettings.port ? tunnelSrc.proxyUrlSettings.port : checkIfExistingTunnel.proxyUrlSettings.port,
+        "protocol": tunnelSrc.proxyUrlSettings.protocol ? tunnelSrc.proxyUrlSettings.protocol : checkIfExistingTunnel.proxyUrlSettings.protocol
       },
       "dest": tunnelSrc.dest ? tunnelSrc.dest : checkIfExistingTunnel.dest,
       "passwords": tunnelSrc.passwords ? tunnelSrc.passwords : checkIfExistingTunnel.passwords,

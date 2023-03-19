@@ -6,6 +6,8 @@ document.getElementById("create").addEventListener("click", async() => {
   const url = document.getElementById("url").value;
   const passwords = document.getElementById("passwords_orig").value;
 
+  const connType = document.getElementById("conn");
+
   if (!passwords.includes(",")) {
     const warn = confirm("Passwords have to be a comma seperated value (unless you only have one password), but there was no commas specified. Would you like to continue?");
     if (!warn) return;
@@ -20,7 +22,7 @@ document.getElementById("create").addEventListener("click", async() => {
       port: port,
       dest: url,
       passwords: password,
-      UDPEnabled: false // TODO
+      UDPEnabled: connType.value == "UDP"
     }
   });
 

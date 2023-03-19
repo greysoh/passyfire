@@ -42,7 +42,7 @@ export async function main(db, appState, syncRunnersEx) {
       }))
     }
     
-    const checkIfExistingTunnel = tunnels.find(i => i.port == req.body.tunnel.port || i.name == req.body.tunnel.name);
+    const checkIfExistingTunnel = tunnels.find(i => i.name == req.body.tunnel.name);
     if (!checkIfExistingTunnel) {
       return res.status(409).send(JSON.stringify({
         error: "Tunnel does not exist!"
@@ -69,7 +69,7 @@ export async function main(db, appState, syncRunnersEx) {
       });
     }
 
-    tunnels.splice(tunnels.indexOf(checkIfExistingTunnel), 1, tunnel)
+    tunnels.splice(tunnels.indexOf(checkIfExistingTunnel), 1, tunnel);
     await db.changeValue("tunnels", JSON.stringify(tunnels));
   
     tunnel.running = user.permissions.routes.start ? true : false;

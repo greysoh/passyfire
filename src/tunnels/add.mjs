@@ -53,6 +53,7 @@ export async function main(db, appState, syncRunnersEx) {
       "proxyUrlSettings": {
         "host": req.body.tunnel.host ? req.body.tunnel.host : "sameAs",
         "port": req.body.tunnel.port,
+        "protocol": req.body.tunnel.UDPEnabled ? "UDP" : "TCP"
       },
       "dest": req.body.tunnel.dest,
       "passwords": req.body.tunnel.passwords,

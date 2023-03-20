@@ -42,7 +42,7 @@ export async function main(db, appState, syncRunnersEx) {
       }))
     }
     
-    const checkIfExistingTunnel = tunnels.find(i => i.port == req.body.tunnel.port || i.name == req.body.tunnel.name);
+    const checkIfExistingTunnel = tunnels.find(i => i.name == req.body.tunnel.name);
     if (!checkIfExistingTunnel) {
       return res.status(409).send(JSON.stringify({
         error: "Tunnel does not exist!"
@@ -55,13 +55,21 @@ export async function main(db, appState, syncRunnersEx) {
       "proxyUrlSettings": {
         "host": tunnelSrc.proxyUrlSettings.host ? tunnelSrc.proxyUrlSettings.host : checkIfExistingTunnel.proxyUrlSettings.host,
         "port": tunnelSrc.proxyUrlSettings.port ? tunnelSrc.proxyUrlSettings.port : checkIfExistingTunnel.proxyUrlSettings.port,
+        "protocol": tunnelSrc.proxyUrlSettings.protocol ? tunnelSrc.proxyUrlSettings.protocol : checkIfExistingTunnel.proxyUrlSettings.protocol
       },
       "dest": tunnelSrc.dest ? tunnelSrc.dest : checkIfExistingTunnel.dest,
       "passwords": tunnelSrc.passwords ? tunnelSrc.passwords : checkIfExistingTunnel.passwords,
       "name": tunnelSrc.name ? tunnelSrc.name : checkIfExistingTunnel.name
     }
 
-    tunnels.splice(tunnels.indexOf(checkIfExistingTunnel), 1, tunnel)
+    // Validate tunnel
+    if (tunnel.proxyUrlSettings.protocol != "UDP" && tunnel.proxyUrlSettings.protocol != "TCP") {
+      return res.status(403).send({
+        "error": "Protocol is not TCP or UDP."
+      });
+    }
+
+    tunnels.splice(tunnels.indexOf(checkIfExistingTunnel), 1, tunnel);
     await db.changeValue("tunnels", JSON.stringify(tunnels));
   
     tunnel.running = user.permissions.routes.start ? true : false;

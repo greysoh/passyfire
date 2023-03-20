@@ -15,7 +15,8 @@ export async function syncRunners(runners) {
 
       server: {
         ip: i.dest.split(":")[0],
-        port: i.dest.split(":")[1] ? i.dest.split(":")[1] : 80
+        port: i.dest.split(":")[1] ? i.dest.split(":")[1] : 80,
+        protocol: i.proxyUrlSettings.protocol
       }
     });
 

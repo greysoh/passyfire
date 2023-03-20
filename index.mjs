@@ -75,13 +75,20 @@ if (!(await db.get("tunnels"))) {
     const i = migrateCheck[j];
 
     if (i.port) {
-      console.log("Migrating '%s'...", i.name);
+      console.log("Migrating '%s' to use ProxyURLSettings...", i.name);
       migrateCheck[j].proxyUrlSettings = {
         host: "sameAs",
         port: i.port
       }
 
       migrateCheck[j].port = undefined;
+
+      await db.changeValue("tunnels", JSON.stringify(migrateCheck));
+    }
+
+    if (!i.proxyUrlSettings.protocol) {
+      console.log("Migrating '%s' to contain protocol information...", i.name);
+      migrateCheck[j].proxyUrlSettings.protocol = "TCP";
 
       await db.changeValue("tunnels", JSON.stringify(migrateCheck));
     }

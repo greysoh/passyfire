@@ -1,8 +1,17 @@
 diff --git a/node_modules/@creamy-dev/passy/index.js b/node_modules/@creamy-dev/passy/index.js
-index 5a98afc..0a22d99 100644
+index 5a98afc..1a6808e 100644
 --- a/node_modules/@creamy-dev/passy/index.js
 +++ b/node_modules/@creamy-dev/passy/index.js
-@@ -9,9 +9,9 @@ class PassyServer {
+@@ -1,6 +1,7 @@
+ const PassProxy = require("./libs/passedWS/index.js");
+ const { WebSocketServer } = require("ws"),
+-  net = require("net");
++  net = require("net"),
++  dgram = require("dgram");
+ 
+ class PassyServer {
+   constructor(options) {
+@@ -9,25 +10,43 @@ class PassyServer {
  
    async main() {
      const options = this.options;
@@ -13,8 +22,53 @@ index 5a98afc..0a22d99 100644
 +    this.wss.on("connection", async function (ws) {
        ws.isReady = false;
  
-       const server = new net.Socket();
-@@ -38,9 +38,9 @@ class PassyServer {
+-      const server = new net.Socket();
++      if (options.server.protocol == "TCP") {
++        ws.isReady = false;
+ 
+-      server.connect(options.server.port, options.server.ip, function () {
+-        ws.isReady = true;
+-        ws.send("Passy: Connected");
+-      });
++        const server = new net.Socket();
+   
+-      server.on("data", function (data) {
+-        if (ws.isReady) ws.send(data);
+-      });
++        server.connect(options.server.port, options.server.ip, function () {
++          ws.isReady = true;
++          ws.send("Passy: Connected");
++        });
+   
+-      ws.on("message", function (data) {
+-        if (ws.isReady) server.write(data);
+-      });
++        server.on("data", function (data) {
++          if (ws.isReady) ws.send(data);
++        });
++  
++        ws.on("message", function (data) {
++          if (ws.isReady) server.write(data);
++        });
++      } else {
++        const server = dgram.createSocket("udp4");
++
++        server.on("message", function (data, rinfo) {
++          if (rinfo.ip != options.server.ip && rinfo.port != options.server.port) return;
++ 
++          ws.send(data);
++        });
++  
++        ws.on("message", function (data) {
++          server.send(data, options.server.port, options.server.ip, (err) => {
++            if (err) throw err;
++          });
++        });
++      }
+     });
+ 
+     let opts = this.options;
+@@ -38,9 +57,9 @@ class PassyServer {
      delete opts.originalPort;
      delete opts.passedPort;
  

@@ -1,7 +1,7 @@
 {
   "name": "passyfire-backend",
-  "version": "0.1.0",
-  "description": "OH SHID FAR it on fi",
+  "version": "0.2.0",
+  "description": "PassyFire is a web proxying solution over normal HTTP protocols, without losing much performance.",
   "main": "index.mjs",
   "scripts": {
     "start": "./forever.sh",
